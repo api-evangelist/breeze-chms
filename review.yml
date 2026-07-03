@@ -1,0 +1,134 @@
+aid: breeze-chms
+name: Breeze ChMS
+review:
+  question: Does Breeze expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-03'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Breeze's entire public API surface is
+    request/response REST over HTTPS, delivered as HTTP GET calls with
+    query-string parameters, scoped to a church subdomain
+    (https://{subdomain}.breezechms.com/api) and authenticated with an Api-Key
+    header. There is no server-push transport (WebSocket or SSE) and no
+    published webhook/event stream on Breeze's own API to model, so there is no
+    event-driven surface for an AsyncAPI document to describe.
+findings:
+  summary: |
+    Breeze ChMS does not publish a documented public WebSocket API. Breeze is
+    church management software (breezechms.com) whose developer API is a
+    documented REST API scoped per church subdomain
+    (https://{subdomain}.breezechms.com/api). Every operation - people, tags,
+    events, check-in/attendance, giving (contributions), funds, pledge
+    campaigns, forms, volunteers, and account - is an HTTP GET request with
+    query-string parameters, authenticated by an account API key sent in the
+    Api-Key HTTP header (obtained by the Account Owner under Manage Account >
+    API Key). The API is rate limited to roughly 20 requests per minute
+    (Breeze recommends ~3.5 seconds between calls). No realtime, bidirectional,
+    or streaming WebSocket (ws:// or wss://) endpoint is documented anywhere in
+    Breeze's API reference, and no public webhook or SSE surface is documented
+    either.
+  openSource: |
+    Breeze itself is proprietary SaaS; there is no official open-source Breeze
+    server or client. Community REST wrappers exist (for example the Python
+    pyBreezeChMS / breeze-chms-api libraries and a Node.js breeze-chms package),
+    but these are third-party and simply call the same documented REST endpoints
+    over the Api-Key header.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://{subdomain}.breezechms.com/api
+      documented: true
+      note: Entire public API. HTTP GET with query-string params; Api-Key header auth. Scoped to the church subdomain.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in the Breeze API reference as of the review date.
+    - protocol: Webhook
+      scheme: https
+      documented: false
+      note: No public outbound webhook / event-callback API is documented on Breeze's own API.
+    - protocol: SSE
+      scheme: https
+      documented: false
+      note: No server-sent-events streaming surface is documented.
+  endpointsConfirmedRest:
+    - GET https://{subdomain}.breezechms.com/api/people
+    - GET https://{subdomain}.breezechms.com/api/people/{person_id}
+    - GET https://{subdomain}.breezechms.com/api/people/add
+    - GET https://{subdomain}.breezechms.com/api/people/update
+    - GET https://{subdomain}.breezechms.com/api/people/delete
+    - GET https://{subdomain}.breezechms.com/api/profile
+    - GET https://{subdomain}.breezechms.com/api/tags/list_tags
+    - GET https://{subdomain}.breezechms.com/api/tags/list_folders
+    - GET https://{subdomain}.breezechms.com/api/tags/assign
+    - GET https://{subdomain}.breezechms.com/api/tags/unassign
+    - GET https://{subdomain}.breezechms.com/api/events
+    - GET https://{subdomain}.breezechms.com/api/events/list_event
+    - GET https://{subdomain}.breezechms.com/api/events/calendars/list
+    - GET https://{subdomain}.breezechms.com/api/events/add
+    - GET https://{subdomain}.breezechms.com/api/events/attendance/add
+    - GET https://{subdomain}.breezechms.com/api/events/attendance/delete
+    - GET https://{subdomain}.breezechms.com/api/events/attendance/list
+    - GET https://{subdomain}.breezechms.com/api/events/attendance/eligible
+    - GET https://{subdomain}.breezechms.com/api/giving/list
+    - GET https://{subdomain}.breezechms.com/api/giving/add
+    - GET https://{subdomain}.breezechms.com/api/giving/edit
+    - GET https://{subdomain}.breezechms.com/api/giving/delete
+    - GET https://{subdomain}.breezechms.com/api/funds/list
+    - GET https://{subdomain}.breezechms.com/api/pledges/list_campaigns
+    - GET https://{subdomain}.breezechms.com/api/pledges/list_pledges
+    - GET https://{subdomain}.breezechms.com/api/forms/list_forms
+    - GET https://{subdomain}.breezechms.com/api/forms/list_form_fields
+    - GET https://{subdomain}.breezechms.com/api/forms/list_form_entries
+    - GET https://{subdomain}.breezechms.com/api/forms/remove_form_entry
+    - GET https://{subdomain}.breezechms.com/api/volunteers/list
+    - GET https://{subdomain}.breezechms.com/api/volunteers/list_roles
+    - GET https://{subdomain}.breezechms.com/api/account/summary
+    - GET https://{subdomain}.breezechms.com/api/account/list_log
+  endpointsModeled:
+    - GET https://{subdomain}.breezechms.com/api/events/locations
+    - GET https://{subdomain}.breezechms.com/api/events/delete
+    - GET https://{subdomain}.breezechms.com/api/tags/add_tag
+    - GET https://{subdomain}.breezechms.com/api/tags/add_tag_folder
+    - GET https://{subdomain}.breezechms.com/api/tags/delete_tag
+    - GET https://{subdomain}.breezechms.com/api/tags/delete_tag_folder
+    - GET https://{subdomain}.breezechms.com/api/volunteers/add
+    - GET https://{subdomain}.breezechms.com/api/volunteers/remove
+    - GET https://{subdomain}.breezechms.com/api/volunteers/update
+    - GET https://{subdomain}.breezechms.com/api/volunteers/add_role
+    - GET https://{subdomain}.breezechms.com/api/volunteers/remove_role
+    - GET https://{subdomain}.breezechms.com/api/families/create
+    - GET https://{subdomain}.breezechms.com/api/families/add
+    - GET https://{subdomain}.breezechms.com/api/families/remove
+  modelingNote: |
+    Endpoints under endpointsConfirmedRest are grounded in Breeze's published
+    API reference guide (app.breezechms.com/api) and corroborated by the
+    community pyBreezeChMS wrapper, which maps directly to the documented
+    routes (contributions use the /giving/* paths). The endpointsModeled list
+    covers additional documented tag / event / volunteer / family write
+    operations included in the reference guide; their exact parameter sets were
+    modeled from the reference-guide summary and should be re-verified against
+    the live per-account reference during reconciliation.
+sources:
+  - url: https://app.breezechms.com/api
+    type: APIReference
+    note: Breeze API reference guide - endpoints, GET-with-query-params pattern, groupings.
+  - url: https://support.breezechms.com/hc/en-us/articles/360001324153-API-Advanced-Custom-Development
+    type: Documentation
+    note: Api-Key header auth, ~20 req/min rate limit (~3.5s between calls), API key under Manage Account > API Key.
+  - url: https://www.breezechms.com/pricing
+    type: Pricing
+    note: Single flat monthly rate, unlimited people/users, all features, no setup/termination fees.
+  - url: https://pypi.org/project/breeze-chms-api/
+    type: SourceCode
+    note: Community Python wrapper mapping to the documented REST endpoints (giving/funds/pledges paths).
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket or other server-push protocol surface exists; Breeze's own
+    public API is entirely request/response REST (HTTP GET with query-string
+    parameters, Api-Key header). No AsyncAPI document was created because there
+    is no event-driven or streaming transport on Breeze's own API to model.

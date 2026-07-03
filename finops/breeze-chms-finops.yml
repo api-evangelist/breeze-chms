@@ -1,0 +1,90 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Breeze ChMS
+providerId: breeze-chms
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Church Management
+- ChMS
+- Giving
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Breeze ChMS spend. Breeze bills a single flat monthly
+  subscription that includes unlimited people, unlimited users, all features,
+  support, the mobile app, and full REST API access, with no setup or
+  termination fees. Because the API is included in the flat rate, API usage
+  itself carries no marginal charge - the request-rate limit (~20/min) governs
+  throughput rather than cost. The only usage-based components are text
+  messaging above the monthly allowance (per-message overage) and per-
+  transaction processing fees on online / text giving. For most churches the
+  dominant, predictable cost is the flat subscription; variable cost tracking
+  focuses on messaging volume and giving-processing fees.
+notes: >-
+  Verify the current monthly rate, text-message overage rate, and giving
+  transaction fee schedule on breezechms.com/pricing. No per-API-call billing
+  exists; optimize for the shared rate limit rather than for cost per request.
+sources:
+- https://www.breezechms.com/pricing
+- https://support.breezechms.com/hc/en-us/articles/360002438453-Pricing-Features-Tech-Requirements
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Breeze ChMS
+serviceCategory: Church Management Software (SaaS)
+billingModel:
+  pricingCategory: Flat-Rate Subscription
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Usage
+focusColumns:
+  ServiceName: Breeze ChMS
+  ServiceCategory: Church Management Software
+  ProviderName: Breeze ChMS
+  PublisherName: Breeze ChMS
+  InvoiceIssuerName: Breeze ChMS
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Flat-Rate Subscription
+meters:
+- name: subscription
+  description: Flat monthly Breeze subscription; includes API access at no extra charge.
+  unit: months
+  aggregation: sum
+  dimensions:
+  - account
+- name: text_messages
+  description: Text messages sent; billed per message above the monthly allowance.
+  unit: messages
+  aggregation: sum
+  dimensions:
+  - account
+- name: giving_transactions
+  description: Online / text giving transactions; billed as a percentage processing fee per donation.
+  unit: transactions
+  aggregation: sum
+  dimensions:
+  - account
+  - fund
+principles:
+- name: Visibility
+  description: Track the flat subscription as a fixed cost and monitor variable text-messaging and giving-processing fees monthly.
+- name: Allocation
+  description: Attribute giving-processing fees by fund to see the net cost of each fund's online giving.
+- name: Optimization
+  description: Stay within the included text-message allowance and cache API reads to avoid rate-limit-driven retries; the API adds no marginal cost so there is nothing to optimize per call.
+- name: Accountability
+  description: Assign an owner for the subscription and for reviewing messaging and giving-fee variance against budget.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

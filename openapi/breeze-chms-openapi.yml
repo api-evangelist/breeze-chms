@@ -1,0 +1,837 @@
+openapi: 3.0.3
+info:
+  title: Breeze ChMS API
+  description: >-
+    The Breeze ChMS API is a documented REST API for Breeze church management
+    software. It is scoped to an individual church subdomain
+    (https://{subdomain}.breezechms.com/api) and covers people, tags, events,
+    check-in / attendance, giving (contributions), funds, pledge campaigns,
+    custom forms, volunteers, and account administration. Every operation is an
+    HTTP GET request whose inputs are supplied as query-string parameters;
+    request bodies for create/update operations are passed as JSON-encoded
+    strings in parameters such as fields_json and funds_json. Authentication is
+    an account API key sent in the Api-Key HTTP header. The API is rate limited
+    to roughly 20 requests per minute; wait about 3.5 seconds between calls. The
+    API key is obtained by the Account Owner under Manage Account > API Key.
+  version: '1.0'
+  contact:
+    name: Breeze ChMS
+    url: https://www.breezechms.com
+servers:
+  - url: https://{subdomain}.breezechms.com/api
+    description: Church-specific Breeze subdomain
+    variables:
+      subdomain:
+        default: yourchurch
+        description: Your church's Breeze subdomain.
+security:
+  - apiKeyAuth: []
+tags:
+  - name: People
+    description: Members, contacts, custom profile fields, and families.
+  - name: Tags
+    description: Tags, tag folders, and tag assignment.
+  - name: Events
+    description: Events, calendars, and locations.
+  - name: Attendance
+    description: Check-in / check-out attendance and eligibility.
+  - name: Giving
+    description: Contributions (giving records).
+  - name: Funds
+    description: Contribution funds.
+  - name: Pledges
+    description: Pledge campaigns and pledges.
+  - name: Forms
+    description: Forms, form fields, and form entries.
+  - name: Volunteers
+    description: Volunteers and volunteer roles for events.
+  - name: Account
+    description: Account summary and activity log.
+paths:
+  /people:
+    get:
+      operationId: listPeople
+      tags: [People]
+      summary: List people
+      description: Retrieves a paged list of people (members and contacts).
+      parameters:
+        - name: limit
+          in: query
+          schema: { type: integer }
+          description: Number of people to return.
+        - name: offset
+          in: query
+          schema: { type: integer }
+          description: Number of people to skip for paging.
+        - name: details
+          in: query
+          schema: { type: integer, enum: [0, 1] }
+          description: Set to 1 to include full profile field details.
+        - name: filter_json
+          in: query
+          schema: { type: string }
+          description: JSON-encoded filter of profile field criteria.
+      responses:
+        '200':
+          description: A list of people.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /people/{person_id}:
+    get:
+      operationId: getPerson
+      tags: [People]
+      summary: Retrieve a person
+      description: Retrieves a single person by ID.
+      parameters:
+        - name: person_id
+          in: path
+          required: true
+          schema: { type: string }
+        - name: details
+          in: query
+          schema: { type: integer, enum: [0, 1] }
+      responses:
+        '200':
+          description: The requested person.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /people/add:
+    get:
+      operationId: addPerson
+      tags: [People]
+      summary: Add a person
+      parameters:
+        - name: first
+          in: query
+          schema: { type: string }
+        - name: last
+          in: query
+          schema: { type: string }
+        - name: fields_json
+          in: query
+          schema: { type: string }
+          description: JSON-encoded array of profile field values.
+      responses:
+        '200':
+          description: The created person.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /people/update:
+    get:
+      operationId: updatePerson
+      tags: [People]
+      summary: Update a person
+      parameters:
+        - name: person_id
+          in: query
+          required: true
+          schema: { type: string }
+        - name: fields_json
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: The updated person.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /people/delete:
+    get:
+      operationId: deletePerson
+      tags: [People]
+      summary: Delete a person
+      parameters:
+        - name: person_id
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Deletion result.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /profile:
+    get:
+      operationId: listProfileFields
+      tags: [People]
+      summary: List profile fields
+      description: Lists the profile fields (and sections) configured for the church.
+      responses:
+        '200':
+          description: A list of profile fields.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /families/create:
+    get:
+      operationId: createFamily
+      tags: [People]
+      summary: Create a family
+      parameters:
+        - name: people_ids_json
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: The created family.
+  /families/add:
+    get:
+      operationId: addToFamily
+      tags: [People]
+      summary: Add people to a family
+      parameters:
+        - name: people_ids_json
+          in: query
+          schema: { type: string }
+        - name: target_person_id
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: Result.
+  /families/remove:
+    get:
+      operationId: removeFromFamily
+      tags: [People]
+      summary: Remove people from a family
+      parameters:
+        - name: people_ids_json
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: Result.
+  /tags/list_tags:
+    get:
+      operationId: listTags
+      tags: [Tags]
+      summary: List tags
+      parameters:
+        - name: folder_id
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: A list of tags.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /tags/list_folders:
+    get:
+      operationId: listTagFolders
+      tags: [Tags]
+      summary: List tag folders
+      responses:
+        '200':
+          description: A list of tag folders.
+  /tags/add_tag:
+    get:
+      operationId: addTag
+      tags: [Tags]
+      summary: Add a tag
+      parameters:
+        - name: name
+          in: query
+          schema: { type: string }
+        - name: folder_id
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: The created tag.
+  /tags/add_tag_folder:
+    get:
+      operationId: addTagFolder
+      tags: [Tags]
+      summary: Add a tag folder
+      parameters:
+        - name: name
+          in: query
+          schema: { type: string }
+        - name: parent_id
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: The created tag folder.
+  /tags/delete_tag:
+    get:
+      operationId: deleteTag
+      tags: [Tags]
+      summary: Delete a tag
+      parameters:
+        - name: tag_id
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: Result.
+  /tags/delete_tag_folder:
+    get:
+      operationId: deleteTagFolder
+      tags: [Tags]
+      summary: Delete a tag folder
+      parameters:
+        - name: folder_id
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: Result.
+  /tags/assign:
+    get:
+      operationId: assignTag
+      tags: [Tags]
+      summary: Assign a tag to a person
+      parameters:
+        - name: person_id
+          in: query
+          schema: { type: string }
+        - name: tag_id
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: Result.
+  /tags/unassign:
+    get:
+      operationId: unassignTag
+      tags: [Tags]
+      summary: Unassign a tag from a person
+      parameters:
+        - name: person_id
+          in: query
+          schema: { type: string }
+        - name: tag_id
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: Result.
+  /events:
+    get:
+      operationId: listEvents
+      tags: [Events]
+      summary: List events
+      parameters:
+        - name: start
+          in: query
+          schema: { type: string }
+          description: Start date (YYYY-MM-DD).
+        - name: end
+          in: query
+          schema: { type: string }
+          description: End date (YYYY-MM-DD).
+        - name: category_id
+          in: query
+          schema: { type: string }
+        - name: eligible
+          in: query
+          schema: { type: integer, enum: [0, 1] }
+        - name: details
+          in: query
+          schema: { type: integer, enum: [0, 1] }
+        - name: limit
+          in: query
+          schema: { type: integer }
+      responses:
+        '200':
+          description: A list of events.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /events/list_event:
+    get:
+      operationId: getEvent
+      tags: [Events]
+      summary: Retrieve an event instance
+      parameters:
+        - name: instance_id
+          in: query
+          required: true
+          schema: { type: string }
+        - name: schedule
+          in: query
+          schema: { type: integer, enum: [0, 1] }
+        - name: schedule_direction
+          in: query
+          schema: { type: string, enum: [before, after] }
+        - name: schedule_limit
+          in: query
+          schema: { type: integer }
+        - name: eligible
+          in: query
+          schema: { type: integer, enum: [0, 1] }
+        - name: details
+          in: query
+          schema: { type: integer, enum: [0, 1] }
+      responses:
+        '200':
+          description: The requested event instance.
+  /events/calendars/list:
+    get:
+      operationId: listCalendars
+      tags: [Events]
+      summary: List calendars
+      responses:
+        '200':
+          description: A list of calendars.
+  /events/locations:
+    get:
+      operationId: listLocations
+      tags: [Events]
+      summary: List event locations
+      responses:
+        '200':
+          description: A list of locations.
+  /events/add:
+    get:
+      operationId: addEvent
+      tags: [Events]
+      summary: Add an event
+      parameters:
+        - name: name
+          in: query
+          schema: { type: string }
+        - name: starts_on
+          in: query
+          schema: { type: string }
+        - name: ends_on
+          in: query
+          schema: { type: string }
+        - name: all_day
+          in: query
+          schema: { type: integer, enum: [0, 1] }
+        - name: description
+          in: query
+          schema: { type: string }
+        - name: category_id
+          in: query
+          schema: { type: string }
+        - name: event_id
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: The created event.
+  /events/delete:
+    get:
+      operationId: deleteEvent
+      tags: [Events]
+      summary: Delete an event instance
+      parameters:
+        - name: instance_id
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Result.
+  /events/attendance/add:
+    get:
+      operationId: addAttendance
+      tags: [Attendance]
+      summary: Add attendance (check in / out)
+      parameters:
+        - name: person_id
+          in: query
+          schema: { type: string }
+        - name: instance_id
+          in: query
+          schema: { type: string }
+        - name: direction
+          in: query
+          schema: { type: string, enum: [in, out] }
+      responses:
+        '200':
+          description: Result.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /events/attendance/delete:
+    get:
+      operationId: deleteAttendance
+      tags: [Attendance]
+      summary: Delete attendance
+      parameters:
+        - name: person_id
+          in: query
+          schema: { type: string }
+        - name: instance_id
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: Result.
+  /events/attendance/list:
+    get:
+      operationId: listAttendance
+      tags: [Attendance]
+      summary: List attendance for an event
+      parameters:
+        - name: instance_id
+          in: query
+          required: true
+          schema: { type: string }
+        - name: details
+          in: query
+          schema: { type: boolean }
+        - name: type
+          in: query
+          schema: { type: string, enum: [person, anonymous] }
+      responses:
+        '200':
+          description: A list of attendance records.
+  /events/attendance/eligible:
+    get:
+      operationId: listEligible
+      tags: [Attendance]
+      summary: List people eligible to check in
+      parameters:
+        - name: instance_id
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: A list of eligible people.
+  /giving/list:
+    get:
+      operationId: listContributions
+      tags: [Giving]
+      summary: List contributions
+      parameters:
+        - name: start
+          in: query
+          schema: { type: string }
+        - name: end
+          in: query
+          schema: { type: string }
+        - name: person_id
+          in: query
+          schema: { type: string }
+        - name: fund_ids
+          in: query
+          schema: { type: string }
+        - name: amount_min
+          in: query
+          schema: { type: string }
+        - name: amount_max
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: A list of contributions.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /giving/add:
+    get:
+      operationId: addContribution
+      tags: [Giving]
+      summary: Add a contribution
+      parameters:
+        - name: date
+          in: query
+          schema: { type: string }
+        - name: name
+          in: query
+          schema: { type: string }
+        - name: person_id
+          in: query
+          schema: { type: string }
+        - name: amount
+          in: query
+          schema: { type: string }
+        - name: method
+          in: query
+          schema: { type: string }
+        - name: funds_json
+          in: query
+          schema: { type: string }
+          description: JSON-encoded array splitting the gift across funds.
+        - name: payment_id
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: The created contribution.
+  /giving/edit:
+    get:
+      operationId: editContribution
+      tags: [Giving]
+      summary: Edit a contribution
+      parameters:
+        - name: payment_id
+          in: query
+          required: true
+          schema: { type: string }
+        - name: amount
+          in: query
+          schema: { type: string }
+        - name: funds_json
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: The updated contribution.
+  /giving/delete:
+    get:
+      operationId: deleteContribution
+      tags: [Giving]
+      summary: Delete a contribution
+      parameters:
+        - name: payment_id
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Result.
+  /funds/list:
+    get:
+      operationId: listFunds
+      tags: [Funds]
+      summary: List funds
+      parameters:
+        - name: include_totals
+          in: query
+          schema: { type: integer, enum: [0, 1] }
+      responses:
+        '200':
+          description: A list of funds.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /pledges/list_campaigns:
+    get:
+      operationId: listCampaigns
+      tags: [Pledges]
+      summary: List pledge campaigns
+      responses:
+        '200':
+          description: A list of pledge campaigns.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /pledges/list_pledges:
+    get:
+      operationId: listPledges
+      tags: [Pledges]
+      summary: List pledges in a campaign
+      parameters:
+        - name: campaign_id
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: A list of pledges.
+  /forms/list_forms:
+    get:
+      operationId: listForms
+      tags: [Forms]
+      summary: List forms
+      parameters:
+        - name: is_archived
+          in: query
+          schema: { type: integer, enum: [0, 1] }
+      responses:
+        '200':
+          description: A list of forms.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /forms/list_form_fields:
+    get:
+      operationId: listFormFields
+      tags: [Forms]
+      summary: List a form's fields
+      parameters:
+        - name: form_id
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: A list of form fields.
+  /forms/list_form_entries:
+    get:
+      operationId: listFormEntries
+      tags: [Forms]
+      summary: List form entries
+      parameters:
+        - name: form_id
+          in: query
+          required: true
+          schema: { type: string }
+        - name: details
+          in: query
+          schema: { type: integer, enum: [0, 1] }
+      responses:
+        '200':
+          description: A list of form entries.
+  /forms/remove_form_entry:
+    get:
+      operationId: removeFormEntry
+      tags: [Forms]
+      summary: Remove a form entry
+      parameters:
+        - name: entry_id
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Result.
+  /volunteers/list:
+    get:
+      operationId: listVolunteers
+      tags: [Volunteers]
+      summary: List volunteers for an event
+      parameters:
+        - name: instance_id
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: A list of volunteers.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /volunteers/add:
+    get:
+      operationId: addVolunteer
+      tags: [Volunteers]
+      summary: Add a volunteer to an event
+      parameters:
+        - name: instance_id
+          in: query
+          schema: { type: string }
+        - name: person_id
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: Result.
+  /volunteers/remove:
+    get:
+      operationId: removeVolunteer
+      tags: [Volunteers]
+      summary: Remove a volunteer from an event
+      parameters:
+        - name: instance_id
+          in: query
+          schema: { type: string }
+        - name: person_id
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: Result.
+  /volunteers/update:
+    get:
+      operationId: updateVolunteer
+      tags: [Volunteers]
+      summary: Update a volunteer's roles
+      parameters:
+        - name: instance_id
+          in: query
+          schema: { type: string }
+        - name: person_id
+          in: query
+          schema: { type: string }
+        - name: role_ids_json
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: Result.
+  /volunteers/list_roles:
+    get:
+      operationId: listVolunteerRoles
+      tags: [Volunteers]
+      summary: List volunteer roles
+      parameters:
+        - name: instance_id
+          in: query
+          schema: { type: string }
+        - name: show_quantity
+          in: query
+          schema: { type: integer, enum: [0, 1] }
+      responses:
+        '200':
+          description: A list of volunteer roles.
+  /volunteers/add_role:
+    get:
+      operationId: addVolunteerRole
+      tags: [Volunteers]
+      summary: Add a volunteer role
+      parameters:
+        - name: instance_id
+          in: query
+          schema: { type: string }
+        - name: name
+          in: query
+          schema: { type: string }
+        - name: quantity
+          in: query
+          schema: { type: integer }
+      responses:
+        '200':
+          description: The created role.
+  /volunteers/remove_role:
+    get:
+      operationId: removeVolunteerRole
+      tags: [Volunteers]
+      summary: Remove a volunteer role
+      parameters:
+        - name: instance_id
+          in: query
+          schema: { type: string }
+        - name: role_id
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: Result.
+  /account/summary:
+    get:
+      operationId: accountSummary
+      tags: [Account]
+      summary: Retrieve account summary
+      responses:
+        '200':
+          description: Account summary information.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /account/list_log:
+    get:
+      operationId: listAccountLog
+      tags: [Account]
+      summary: List account activity log
+      parameters:
+        - name: action
+          in: query
+          schema: { type: string }
+        - name: start
+          in: query
+          schema: { type: string }
+        - name: end
+          in: query
+          schema: { type: string }
+        - name: user_id
+          in: query
+          schema: { type: string }
+        - name: details
+          in: query
+          schema: { type: integer, enum: [0, 1] }
+        - name: limit
+          in: query
+          schema: { type: integer }
+      responses:
+        '200':
+          description: A list of account log entries.
+components:
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Api-Key
+      description: >-
+        Account API key sent in the Api-Key header. The Account Owner generates
+        it under Manage Account > API Key in the Breeze web app.
+  responses:
+    Unauthorized:
+      description: Missing or invalid Api-Key header.

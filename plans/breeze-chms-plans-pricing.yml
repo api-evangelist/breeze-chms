@@ -1,0 +1,109 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Breeze ChMS
+providerId: breeze-chms
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Church Management
+- ChMS
+- Giving
+- Membership
+- Plans
+description: >-
+  Breeze ChMS uses a single flat-rate subscription rather than tiers or
+  per-member pricing. One price includes unlimited people, unlimited users, all
+  features, phone and email support, the mobile app, and online and text giving,
+  with no setup or termination fees and free data move-in. A 30-day full-feature
+  free trial is available with no credit card required. The REST API (including
+  the Api-Key credential) is included in the subscription at no additional
+  charge. Two usage-based add-ons sit on top of the flat rate: text messaging
+  beyond a monthly allowance, and per-transaction processing fees on online /
+  text giving. The published flat rate is approximately $72/month (USD); confirm
+  the current figure on the Breeze pricing page during reconciliation.
+notes: >-
+  Pricing is a single all-inclusive monthly rate; there are no API-specific
+  charges. Text-messaging overage and giving transaction fees are the only
+  usage-based components. Verify the current monthly price and fee schedule at
+  breezechms.com/pricing.
+sources:
+- https://www.breezechms.com/pricing
+- https://support.breezechms.com/hc/en-us/articles/360002438453-Pricing-Features-Tech-Requirements
+- https://support.breezechms.com/hc/en-us/articles/360002329214-5-Questions-Churches-Ask-Us-About-Our-Price
+plans:
+- id: breeze-free-trial
+  name: Free Trial
+  type: trial
+  description: >-
+    30-day full-feature trial (one month free) with no credit card required.
+    Includes complete access to all Breeze features and the API.
+  entries:
+  - label: Trial Period
+    name: trial_period
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free for 30 days
+    userMultiplied: false
+  elements:
+  - name: All Features
+  - name: Unlimited People
+  - name: Unlimited Users
+  - name: REST API Access
+- id: breeze-flat-subscription
+  name: Breeze Subscription (Flat Rate)
+  type: paid
+  description: >-
+    Single all-inclusive plan. One flat monthly price covers unlimited people,
+    unlimited users, all features, phone and email support, mobile app, online
+    and text giving, and full REST API access, with no setup or termination
+    fees and free data move-in.
+  entries:
+  - label: Monthly Subscription
+    name: monthly_subscription
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: approximately $72/month USD (verify on pricing page)
+    userMultiplied: false
+  - label: Included Text Messages
+    name: included_texts
+    type: usage
+    metric: messages
+    limit: 250
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included, then approximately $0.019 per additional text
+    userMultiplied: false
+  - label: Online / Text Giving Transactions
+    name: giving_transactions
+    type: usage
+    metric: transactions
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: per-transaction processing fee (percentage of each donation)
+    userMultiplied: false
+  elements:
+  - name: Unlimited People
+  - name: Unlimited Users
+  - name: All Features
+  - name: Phone and Email Support
+  - name: Mobile App
+  - name: Online and Text Giving
+  - name: REST API Access
+  - name: No Setup or Termination Fees
+  - name: Free Data Move-In
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,256 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Breeze ChMS API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "apikey": {
+        "key": "Api-Key",
+        "value": "{{apiKey}}",
+        "in": "header"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "People", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List people.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://{{subdomain}}.breezechms.com/api/people",
+            "params": [
+              { "name": "limit", "value": "50", "type": "query", "description": "Number of people to return." },
+              { "name": "offset", "value": "0", "type": "query", "description": "Offset for paging." },
+              { "name": "details", "value": "1", "type": "query", "description": "Set to 1 to include full profile details." },
+              { "name": "filter_json", "value": "", "type": "query", "description": "JSON-encoded field filter." }
+            ]
+          },
+          "docs": "Retrieves a paged list of people."
+        },
+        {
+          "info": { "name": "Retrieve a person.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://{{subdomain}}.breezechms.com/api/people/:person_id",
+            "params": [ { "name": "person_id", "value": "", "type": "path", "description": "The person ID." } ]
+          },
+          "docs": "Retrieves a single person by ID."
+        },
+        {
+          "info": { "name": "Add a person.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://{{subdomain}}.breezechms.com/api/people/add",
+            "params": [
+              { "name": "first", "value": "", "type": "query" },
+              { "name": "last", "value": "", "type": "query" },
+              { "name": "fields_json", "value": "", "type": "query", "description": "JSON-encoded profile field values." }
+            ]
+          },
+          "docs": "Adds a new person."
+        },
+        {
+          "info": { "name": "Update a person.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://{{subdomain}}.breezechms.com/api/people/update",
+            "params": [
+              { "name": "person_id", "value": "", "type": "query" },
+              { "name": "fields_json", "value": "", "type": "query" }
+            ]
+          },
+          "docs": "Updates an existing person."
+        },
+        {
+          "info": { "name": "Delete a person.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://{{subdomain}}.breezechms.com/api/people/delete",
+            "params": [ { "name": "person_id", "value": "", "type": "query" } ]
+          },
+          "docs": "Deletes a person."
+        },
+        {
+          "info": { "name": "List profile fields.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/profile" },
+          "docs": "Lists profile fields configured for the church."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Tags", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List tags.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/tags/list_tags", "params": [ { "name": "folder_id", "value": "", "type": "query" } ] },
+          "docs": "Lists tags, optionally within a folder."
+        },
+        {
+          "info": { "name": "List tag folders.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/tags/list_folders" },
+          "docs": "Lists tag folders."
+        },
+        {
+          "info": { "name": "Assign a tag.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/tags/assign", "params": [ { "name": "person_id", "value": "", "type": "query" }, { "name": "tag_id", "value": "", "type": "query" } ] },
+          "docs": "Assigns a tag to a person."
+        },
+        {
+          "info": { "name": "Unassign a tag.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/tags/unassign", "params": [ { "name": "person_id", "value": "", "type": "query" }, { "name": "tag_id", "value": "", "type": "query" } ] },
+          "docs": "Unassigns a tag from a person."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Events", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List events.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/events", "params": [ { "name": "start", "value": "", "type": "query" }, { "name": "end", "value": "", "type": "query" }, { "name": "details", "value": "1", "type": "query" } ] },
+          "docs": "Lists events within a date range."
+        },
+        {
+          "info": { "name": "Retrieve an event instance.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/events/list_event", "params": [ { "name": "instance_id", "value": "", "type": "query" } ] },
+          "docs": "Retrieves a single event instance."
+        },
+        {
+          "info": { "name": "List calendars.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/events/calendars/list" },
+          "docs": "Lists calendars."
+        },
+        {
+          "info": { "name": "Add an event.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/events/add", "params": [ { "name": "name", "value": "", "type": "query" }, { "name": "starts_on", "value": "", "type": "query" }, { "name": "ends_on", "value": "", "type": "query" } ] },
+          "docs": "Adds an event."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Check-Ins and Attendance", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Add attendance.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/events/attendance/add", "params": [ { "name": "person_id", "value": "", "type": "query" }, { "name": "instance_id", "value": "", "type": "query" }, { "name": "direction", "value": "in", "type": "query" } ] },
+          "docs": "Checks a person in or out of an event."
+        },
+        {
+          "info": { "name": "List attendance.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/events/attendance/list", "params": [ { "name": "instance_id", "value": "", "type": "query" }, { "name": "details", "value": "true", "type": "query" } ] },
+          "docs": "Lists attendance for an event instance."
+        },
+        {
+          "info": { "name": "List eligible people.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/events/attendance/eligible", "params": [ { "name": "instance_id", "value": "", "type": "query" } ] },
+          "docs": "Lists people eligible to check in."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Giving and Contributions", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List contributions.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/giving/list", "params": [ { "name": "start", "value": "", "type": "query" }, { "name": "end", "value": "", "type": "query" } ] },
+          "docs": "Lists contributions."
+        },
+        {
+          "info": { "name": "Add a contribution.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/giving/add", "params": [ { "name": "date", "value": "", "type": "query" }, { "name": "person_id", "value": "", "type": "query" }, { "name": "amount", "value": "", "type": "query" }, { "name": "funds_json", "value": "", "type": "query", "description": "JSON-encoded fund split." } ] },
+          "docs": "Adds a contribution, optionally split across funds."
+        },
+        {
+          "info": { "name": "Edit a contribution.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/giving/edit", "params": [ { "name": "payment_id", "value": "", "type": "query" } ] },
+          "docs": "Edits a contribution."
+        },
+        {
+          "info": { "name": "Delete a contribution.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/giving/delete", "params": [ { "name": "payment_id", "value": "", "type": "query" } ] },
+          "docs": "Deletes a contribution."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Funds", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List funds.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/funds/list", "params": [ { "name": "include_totals", "value": "1", "type": "query" } ] },
+          "docs": "Lists contribution funds."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Pledges", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List pledge campaigns.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/pledges/list_campaigns" },
+          "docs": "Lists pledge campaigns."
+        },
+        {
+          "info": { "name": "List pledges in a campaign.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/pledges/list_pledges", "params": [ { "name": "campaign_id", "value": "", "type": "query" } ] },
+          "docs": "Lists pledges within a campaign."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Forms", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List forms.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/forms/list_forms", "params": [ { "name": "is_archived", "value": "0", "type": "query" } ] },
+          "docs": "Lists forms."
+        },
+        {
+          "info": { "name": "List form fields.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/forms/list_form_fields", "params": [ { "name": "form_id", "value": "", "type": "query" } ] },
+          "docs": "Lists the fields for a form."
+        },
+        {
+          "info": { "name": "List form entries.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/forms/list_form_entries", "params": [ { "name": "form_id", "value": "", "type": "query" }, { "name": "details", "value": "1", "type": "query" } ] },
+          "docs": "Lists submitted form entries."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Volunteers", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List volunteers.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/volunteers/list", "params": [ { "name": "instance_id", "value": "", "type": "query" } ] },
+          "docs": "Lists volunteers on an event instance."
+        },
+        {
+          "info": { "name": "List volunteer roles.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/volunteers/list_roles", "params": [ { "name": "instance_id", "value": "", "type": "query" }, { "name": "show_quantity", "value": "1", "type": "query" } ] },
+          "docs": "Lists volunteer roles for an event."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Account", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Account summary.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/account/summary" },
+          "docs": "Retrieves an account summary."
+        },
+        {
+          "info": { "name": "List account log.", "type": "http" },
+          "http": { "method": "GET", "url": "https://{{subdomain}}.breezechms.com/api/account/list_log", "params": [ { "name": "limit", "value": "100", "type": "query" } ] },
+          "docs": "Lists account activity log entries."
+        }
+      ]
+    }
+  ]
+}

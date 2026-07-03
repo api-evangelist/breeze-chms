@@ -1,0 +1,226 @@
+{
+  "info": {
+    "name": "Breeze ChMS API",
+    "description": "The Breeze ChMS REST API for church management, scoped to a church subdomain (https://{{subdomain}}.breezechms.com/api). Covers people, tags, events, check-in/attendance, giving, funds, pledges, forms, volunteers, and account. All requests are HTTP GET with query parameters, authenticated with an account API key in the Api-Key header. Rate limited to ~20 requests/minute (wait ~3.5s between calls). Set the {{subdomain}} and {{apiKey}} variables before running.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "Api-Key", "type": "string" },
+      { "key": "value", "value": "{{apiKey}}", "type": "string" },
+      { "key": "in", "value": "header", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://{{subdomain}}.breezechms.com/api", "type": "string" },
+    { "key": "subdomain", "value": "yourchurch", "type": "string" },
+    { "key": "apiKey", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "People",
+      "item": [
+        {
+          "name": "List people",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/people?limit=50&offset=0&details=1", "host": ["{{baseUrl}}"], "path": ["people"], "query": [ { "key": "limit", "value": "50" }, { "key": "offset", "value": "0" }, { "key": "details", "value": "1" }, { "key": "filter_json", "value": "", "disabled": true } ] },
+            "description": "Retrieves a paged list of people."
+          }
+        },
+        {
+          "name": "Retrieve a person",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/people/:person_id?details=1", "host": ["{{baseUrl}}"], "path": ["people", ":person_id"], "query": [ { "key": "details", "value": "1" } ], "variable": [ { "key": "person_id", "value": "" } ] },
+            "description": "Retrieves a single person by ID."
+          }
+        },
+        {
+          "name": "Add a person",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/people/add?first=&last=&fields_json=", "host": ["{{baseUrl}}"], "path": ["people", "add"], "query": [ { "key": "first", "value": "" }, { "key": "last", "value": "" }, { "key": "fields_json", "value": "" } ] },
+            "description": "Adds a new person."
+          }
+        },
+        {
+          "name": "Update a person",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/people/update?person_id=&fields_json=", "host": ["{{baseUrl}}"], "path": ["people", "update"], "query": [ { "key": "person_id", "value": "" }, { "key": "fields_json", "value": "" } ] },
+            "description": "Updates an existing person."
+          }
+        },
+        {
+          "name": "Delete a person",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/people/delete?person_id=", "host": ["{{baseUrl}}"], "path": ["people", "delete"], "query": [ { "key": "person_id", "value": "" } ] },
+            "description": "Deletes a person."
+          }
+        },
+        {
+          "name": "List profile fields",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/profile", "host": ["{{baseUrl}}"], "path": ["profile"] },
+            "description": "Lists the profile fields configured for the church."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tags",
+      "item": [
+        {
+          "name": "List tags",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/tags/list_tags?folder_id=", "host": ["{{baseUrl}}"], "path": ["tags", "list_tags"], "query": [ { "key": "folder_id", "value": "" } ] }, "description": "Lists tags, optionally within a folder." }
+        },
+        {
+          "name": "List tag folders",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/tags/list_folders", "host": ["{{baseUrl}}"], "path": ["tags", "list_folders"] }, "description": "Lists tag folders." }
+        },
+        {
+          "name": "Assign a tag",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/tags/assign?person_id=&tag_id=", "host": ["{{baseUrl}}"], "path": ["tags", "assign"], "query": [ { "key": "person_id", "value": "" }, { "key": "tag_id", "value": "" } ] }, "description": "Assigns a tag to a person." }
+        },
+        {
+          "name": "Unassign a tag",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/tags/unassign?person_id=&tag_id=", "host": ["{{baseUrl}}"], "path": ["tags", "unassign"], "query": [ { "key": "person_id", "value": "" }, { "key": "tag_id", "value": "" } ] }, "description": "Unassigns a tag from a person." }
+        }
+      ]
+    },
+    {
+      "name": "Events",
+      "item": [
+        {
+          "name": "List events",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/events?start=&end=&details=1", "host": ["{{baseUrl}}"], "path": ["events"], "query": [ { "key": "start", "value": "" }, { "key": "end", "value": "" }, { "key": "category_id", "value": "", "disabled": true }, { "key": "details", "value": "1" } ] }, "description": "Lists events within a date range." }
+        },
+        {
+          "name": "Retrieve an event instance",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/events/list_event?instance_id=", "host": ["{{baseUrl}}"], "path": ["events", "list_event"], "query": [ { "key": "instance_id", "value": "" } ] }, "description": "Retrieves a single event instance." }
+        },
+        {
+          "name": "List calendars",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/events/calendars/list", "host": ["{{baseUrl}}"], "path": ["events", "calendars", "list"] }, "description": "Lists calendars." }
+        },
+        {
+          "name": "Add an event",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/events/add?name=&starts_on=&ends_on=", "host": ["{{baseUrl}}"], "path": ["events", "add"], "query": [ { "key": "name", "value": "" }, { "key": "starts_on", "value": "" }, { "key": "ends_on", "value": "" } ] }, "description": "Adds an event." }
+        }
+      ]
+    },
+    {
+      "name": "Check-Ins and Attendance",
+      "item": [
+        {
+          "name": "Add attendance",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/events/attendance/add?person_id=&instance_id=&direction=in", "host": ["{{baseUrl}}"], "path": ["events", "attendance", "add"], "query": [ { "key": "person_id", "value": "" }, { "key": "instance_id", "value": "" }, { "key": "direction", "value": "in" } ] }, "description": "Checks a person in or out of an event." }
+        },
+        {
+          "name": "List attendance",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/events/attendance/list?instance_id=&details=true", "host": ["{{baseUrl}}"], "path": ["events", "attendance", "list"], "query": [ { "key": "instance_id", "value": "" }, { "key": "details", "value": "true" } ] }, "description": "Lists attendance for an event instance." }
+        },
+        {
+          "name": "List eligible people",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/events/attendance/eligible?instance_id=", "host": ["{{baseUrl}}"], "path": ["events", "attendance", "eligible"], "query": [ { "key": "instance_id", "value": "" } ] }, "description": "Lists people eligible to check in to an event." }
+        }
+      ]
+    },
+    {
+      "name": "Giving and Contributions",
+      "item": [
+        {
+          "name": "List contributions",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/giving/list?start=&end=", "host": ["{{baseUrl}}"], "path": ["giving", "list"], "query": [ { "key": "start", "value": "" }, { "key": "end", "value": "" }, { "key": "person_id", "value": "", "disabled": true } ] }, "description": "Lists contributions." }
+        },
+        {
+          "name": "Add a contribution",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/giving/add?date=&person_id=&amount=&funds_json=", "host": ["{{baseUrl}}"], "path": ["giving", "add"], "query": [ { "key": "date", "value": "" }, { "key": "person_id", "value": "" }, { "key": "amount", "value": "" }, { "key": "funds_json", "value": "" } ] }, "description": "Adds a contribution, optionally split across funds." }
+        },
+        {
+          "name": "Edit a contribution",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/giving/edit?payment_id=", "host": ["{{baseUrl}}"], "path": ["giving", "edit"], "query": [ { "key": "payment_id", "value": "" } ] }, "description": "Edits a contribution." }
+        },
+        {
+          "name": "Delete a contribution",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/giving/delete?payment_id=", "host": ["{{baseUrl}}"], "path": ["giving", "delete"], "query": [ { "key": "payment_id", "value": "" } ] }, "description": "Deletes a contribution." }
+        }
+      ]
+    },
+    {
+      "name": "Funds",
+      "item": [
+        {
+          "name": "List funds",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/funds/list?include_totals=1", "host": ["{{baseUrl}}"], "path": ["funds", "list"], "query": [ { "key": "include_totals", "value": "1" } ] }, "description": "Lists the contribution funds." }
+        }
+      ]
+    },
+    {
+      "name": "Pledges",
+      "item": [
+        {
+          "name": "List pledge campaigns",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/pledges/list_campaigns", "host": ["{{baseUrl}}"], "path": ["pledges", "list_campaigns"] }, "description": "Lists pledge campaigns." }
+        },
+        {
+          "name": "List pledges in a campaign",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/pledges/list_pledges?campaign_id=", "host": ["{{baseUrl}}"], "path": ["pledges", "list_pledges"], "query": [ { "key": "campaign_id", "value": "" } ] }, "description": "Lists the pledges within a campaign." }
+        }
+      ]
+    },
+    {
+      "name": "Forms",
+      "item": [
+        {
+          "name": "List forms",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/forms/list_forms?is_archived=0", "host": ["{{baseUrl}}"], "path": ["forms", "list_forms"], "query": [ { "key": "is_archived", "value": "0" } ] }, "description": "Lists forms." }
+        },
+        {
+          "name": "List form fields",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/forms/list_form_fields?form_id=", "host": ["{{baseUrl}}"], "path": ["forms", "list_form_fields"], "query": [ { "key": "form_id", "value": "" } ] }, "description": "Lists the fields for a form." }
+        },
+        {
+          "name": "List form entries",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/forms/list_form_entries?form_id=&details=1", "host": ["{{baseUrl}}"], "path": ["forms", "list_form_entries"], "query": [ { "key": "form_id", "value": "" }, { "key": "details", "value": "1" } ] }, "description": "Lists submitted form entries." }
+        }
+      ]
+    },
+    {
+      "name": "Volunteers",
+      "item": [
+        {
+          "name": "List volunteers",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/volunteers/list?instance_id=", "host": ["{{baseUrl}}"], "path": ["volunteers", "list"], "query": [ { "key": "instance_id", "value": "" } ] }, "description": "Lists volunteers on an event instance." }
+        },
+        {
+          "name": "List volunteer roles",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/volunteers/list_roles?instance_id=&show_quantity=1", "host": ["{{baseUrl}}"], "path": ["volunteers", "list_roles"], "query": [ { "key": "instance_id", "value": "" }, { "key": "show_quantity", "value": "1" } ] }, "description": "Lists volunteer roles for an event." }
+        }
+      ]
+    },
+    {
+      "name": "Account",
+      "item": [
+        {
+          "name": "Account summary",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/account/summary", "host": ["{{baseUrl}}"], "path": ["account", "summary"] }, "description": "Retrieves an account summary." }
+        },
+        {
+          "name": "List account log",
+          "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/account/list_log?limit=100", "host": ["{{baseUrl}}"], "path": ["account", "list_log"], "query": [ { "key": "action", "value": "", "disabled": true }, { "key": "limit", "value": "100" } ] }, "description": "Lists account activity log entries." }
+        }
+      ]
+    }
+  ]
+}

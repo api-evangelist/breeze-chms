@@ -1,0 +1,57 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Breeze ChMS
+providerId: breeze-chms
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Church Management
+- ChMS
+- Rate Limiting
+- Quotas
+description: >-
+  The Breeze ChMS API enforces a request-rate limit of roughly 20 requests per
+  minute per account API key. Breeze recommends waiting about 3.5 seconds
+  between calls to stay under the limit; exceeding it results in a temporary
+  block. The limit applies across the whole API surface (people, tags, events,
+  attendance, giving, funds, pledges, forms, volunteers, and account) since all
+  endpoints share the same Api-Key credential and church subdomain. There are no
+  separate published per-endpoint quotas, and there is no data volume or
+  seat-based API cap - the constraint is request frequency.
+notes: >-
+  Design integrations to be polite: batch reads, cache results, and space calls
+  ~3.5 seconds apart. The 20-requests-per-minute figure is from Breeze's
+  API / custom development documentation; re-verify during reconciliation.
+sources:
+- https://support.breezechms.com/hc/en-us/articles/360001324153-API-Advanced-Custom-Development
+- https://app.breezechms.com/api
+responseCodes:
+  throttled: 429
+limits:
+- name: API Requests
+  scope: account
+  metric: requests
+  limit: ~20 per minute
+  notes: Shared across all endpoints for a given church subdomain and Api-Key.
+- name: Recommended Spacing
+  scope: account
+  metric: seconds
+  limit: ~3.5 seconds between calls
+  notes: Breeze's recommended delay to stay under the per-minute limit.
+- name: Text Messaging Allowance
+  scope: account
+  metric: messages
+  limit: 250 per month included
+  notes: Product-level messaging allowance, not an API request limit; overage billed per message.
+policies:
+- name: Temporary Block
+  description: Exceeding the request-rate limit results in a temporary block until the window resets.
+- name: Backoff Strategy
+  description: Implement spacing (~3.5s) and exponential backoff with jitter; honor 429 responses and retry after the window resets.
+- name: Caching
+  description: Cache reference data such as funds, tags, calendars, and profile fields to minimize repeated calls against the shared rate limit.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
