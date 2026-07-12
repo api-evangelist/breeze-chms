@@ -230,6 +230,10 @@ apis:
   description: Retrieve an account summary and read the account activity log,
     filtered by action, user, and date range, for auditing and administration.
 common:
+- type: DomainSecurity
+  url: security/breeze-chms-domain-security.yml
+- type: Authentication
+  url: authentication/breeze-chms-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/breeze-chms
 - type: Website
@@ -242,6 +246,8 @@ common:
   url: rate-limits/breeze-chms-rate-limits.yml
 - type: FinOps
   url: finops/breeze-chms-finops.yml
+- url: https://get.tithe.ly/blog/rss.xml
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

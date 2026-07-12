@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/breeze-chms-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: apiKeyAuth
+  type: apiKey
+  in: header
+  parameter: Api-Key
+  description: Account API key sent in the Api-Key header. The Account Owner generates it under
+    Manage Account > API Key in the Breeze web app.
+  sources:
+  - openapi/breeze-chms-openapi.yml
