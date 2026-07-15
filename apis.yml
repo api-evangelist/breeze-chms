@@ -230,6 +230,8 @@ apis:
   description: Retrieve an account summary and read the account activity log,
     filtered by action, user, and date range, for auditing and administration.
 common:
+- type: AgenticAccess
+  url: agentic-access/breeze-chms-agentic-access.yml
 - type: DomainSecurity
   url: security/breeze-chms-domain-security.yml
 - type: Authentication
