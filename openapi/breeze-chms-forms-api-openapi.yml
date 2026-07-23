@@ -1,0 +1,102 @@
+openapi: 3.0.3
+info:
+  title: Breeze ChMS Account Forms API
+  description: The Breeze ChMS API is a documented REST API for Breeze church management software. It is scoped to an individual church subdomain (https://{subdomain}.breezechms.com/api) and covers people, tags, events, check-in / attendance, giving (contributions), funds, pledge campaigns, custom forms, volunteers, and account administration. Every operation is an HTTP GET request whose inputs are supplied as query-string parameters; request bodies for create/update operations are passed as JSON-encoded strings in parameters such as fields_json and funds_json. Authentication is an account API key sent in the Api-Key HTTP header. The API is rate limited to roughly 20 requests per minute; wait about 3.5 seconds between calls. The API key is obtained by the Account Owner under Manage Account > API Key.
+  version: '1.0'
+  contact:
+    name: Breeze ChMS
+    url: https://www.breezechms.com
+servers:
+- url: https://{subdomain}.breezechms.com/api
+  description: Church-specific Breeze subdomain
+  variables:
+    subdomain:
+      default: yourchurch
+      description: Your church's Breeze subdomain.
+security:
+- apiKeyAuth: []
+tags:
+- name: Forms
+  description: Forms, form fields, and form entries.
+paths:
+  /forms/list_forms:
+    get:
+      operationId: listForms
+      tags:
+      - Forms
+      summary: List forms
+      parameters:
+      - name: is_archived
+        in: query
+        schema:
+          type: integer
+          enum:
+          - 0
+          - 1
+      responses:
+        '200':
+          description: A list of forms.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /forms/list_form_fields:
+    get:
+      operationId: listFormFields
+      tags:
+      - Forms
+      summary: List a form's fields
+      parameters:
+      - name: form_id
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of form fields.
+  /forms/list_form_entries:
+    get:
+      operationId: listFormEntries
+      tags:
+      - Forms
+      summary: List form entries
+      parameters:
+      - name: form_id
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: details
+        in: query
+        schema:
+          type: integer
+          enum:
+          - 0
+          - 1
+      responses:
+        '200':
+          description: A list of form entries.
+  /forms/remove_form_entry:
+    get:
+      operationId: removeFormEntry
+      tags:
+      - Forms
+      summary: Remove a form entry
+      parameters:
+      - name: entry_id
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Result.
+components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid Api-Key header.
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Api-Key
+      description: Account API key sent in the Api-Key header. The Account Owner generates it under Manage Account > API Key in the Breeze web app.

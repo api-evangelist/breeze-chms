@@ -1,0 +1,213 @@
+openapi: 3.0.3
+info:
+  title: Breeze ChMS Account People API
+  description: The Breeze ChMS API is a documented REST API for Breeze church management software. It is scoped to an individual church subdomain (https://{subdomain}.breezechms.com/api) and covers people, tags, events, check-in / attendance, giving (contributions), funds, pledge campaigns, custom forms, volunteers, and account administration. Every operation is an HTTP GET request whose inputs are supplied as query-string parameters; request bodies for create/update operations are passed as JSON-encoded strings in parameters such as fields_json and funds_json. Authentication is an account API key sent in the Api-Key HTTP header. The API is rate limited to roughly 20 requests per minute; wait about 3.5 seconds between calls. The API key is obtained by the Account Owner under Manage Account > API Key.
+  version: '1.0'
+  contact:
+    name: Breeze ChMS
+    url: https://www.breezechms.com
+servers:
+- url: https://{subdomain}.breezechms.com/api
+  description: Church-specific Breeze subdomain
+  variables:
+    subdomain:
+      default: yourchurch
+      description: Your church's Breeze subdomain.
+security:
+- apiKeyAuth: []
+tags:
+- name: People
+  description: Members, contacts, custom profile fields, and families.
+paths:
+  /people:
+    get:
+      operationId: listPeople
+      tags:
+      - People
+      summary: List people
+      description: Retrieves a paged list of people (members and contacts).
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+        description: Number of people to return.
+      - name: offset
+        in: query
+        schema:
+          type: integer
+        description: Number of people to skip for paging.
+      - name: details
+        in: query
+        schema:
+          type: integer
+          enum:
+          - 0
+          - 1
+        description: Set to 1 to include full profile field details.
+      - name: filter_json
+        in: query
+        schema:
+          type: string
+        description: JSON-encoded filter of profile field criteria.
+      responses:
+        '200':
+          description: A list of people.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /people/{person_id}:
+    get:
+      operationId: getPerson
+      tags:
+      - People
+      summary: Retrieve a person
+      description: Retrieves a single person by ID.
+      parameters:
+      - name: person_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: details
+        in: query
+        schema:
+          type: integer
+          enum:
+          - 0
+          - 1
+      responses:
+        '200':
+          description: The requested person.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /people/add:
+    get:
+      operationId: addPerson
+      tags:
+      - People
+      summary: Add a person
+      parameters:
+      - name: first
+        in: query
+        schema:
+          type: string
+      - name: last
+        in: query
+        schema:
+          type: string
+      - name: fields_json
+        in: query
+        schema:
+          type: string
+        description: JSON-encoded array of profile field values.
+      responses:
+        '200':
+          description: The created person.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /people/update:
+    get:
+      operationId: updatePerson
+      tags:
+      - People
+      summary: Update a person
+      parameters:
+      - name: person_id
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: fields_json
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The updated person.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /people/delete:
+    get:
+      operationId: deletePerson
+      tags:
+      - People
+      summary: Delete a person
+      parameters:
+      - name: person_id
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Deletion result.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /profile:
+    get:
+      operationId: listProfileFields
+      tags:
+      - People
+      summary: List profile fields
+      description: Lists the profile fields (and sections) configured for the church.
+      responses:
+        '200':
+          description: A list of profile fields.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /families/create:
+    get:
+      operationId: createFamily
+      tags:
+      - People
+      summary: Create a family
+      parameters:
+      - name: people_ids_json
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The created family.
+  /families/add:
+    get:
+      operationId: addToFamily
+      tags:
+      - People
+      summary: Add people to a family
+      parameters:
+      - name: people_ids_json
+        in: query
+        schema:
+          type: string
+      - name: target_person_id
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Result.
+  /families/remove:
+    get:
+      operationId: removeFromFamily
+      tags:
+      - People
+      summary: Remove people from a family
+      parameters:
+      - name: people_ids_json
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Result.
+components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid Api-Key header.
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Api-Key
+      description: Account API key sent in the Api-Key header. The Account Owner generates it under Manage Account > API Key in the Breeze web app.

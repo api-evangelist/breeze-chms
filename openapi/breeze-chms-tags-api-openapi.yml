@@ -1,0 +1,156 @@
+openapi: 3.0.3
+info:
+  title: Breeze ChMS Account Tags API
+  description: The Breeze ChMS API is a documented REST API for Breeze church management software. It is scoped to an individual church subdomain (https://{subdomain}.breezechms.com/api) and covers people, tags, events, check-in / attendance, giving (contributions), funds, pledge campaigns, custom forms, volunteers, and account administration. Every operation is an HTTP GET request whose inputs are supplied as query-string parameters; request bodies for create/update operations are passed as JSON-encoded strings in parameters such as fields_json and funds_json. Authentication is an account API key sent in the Api-Key HTTP header. The API is rate limited to roughly 20 requests per minute; wait about 3.5 seconds between calls. The API key is obtained by the Account Owner under Manage Account > API Key.
+  version: '1.0'
+  contact:
+    name: Breeze ChMS
+    url: https://www.breezechms.com
+servers:
+- url: https://{subdomain}.breezechms.com/api
+  description: Church-specific Breeze subdomain
+  variables:
+    subdomain:
+      default: yourchurch
+      description: Your church's Breeze subdomain.
+security:
+- apiKeyAuth: []
+tags:
+- name: Tags
+  description: Tags, tag folders, and tag assignment.
+paths:
+  /tags/list_tags:
+    get:
+      operationId: listTags
+      tags:
+      - Tags
+      summary: List tags
+      parameters:
+      - name: folder_id
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of tags.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /tags/list_folders:
+    get:
+      operationId: listTagFolders
+      tags:
+      - Tags
+      summary: List tag folders
+      responses:
+        '200':
+          description: A list of tag folders.
+  /tags/add_tag:
+    get:
+      operationId: addTag
+      tags:
+      - Tags
+      summary: Add a tag
+      parameters:
+      - name: name
+        in: query
+        schema:
+          type: string
+      - name: folder_id
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The created tag.
+  /tags/add_tag_folder:
+    get:
+      operationId: addTagFolder
+      tags:
+      - Tags
+      summary: Add a tag folder
+      parameters:
+      - name: name
+        in: query
+        schema:
+          type: string
+      - name: parent_id
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The created tag folder.
+  /tags/delete_tag:
+    get:
+      operationId: deleteTag
+      tags:
+      - Tags
+      summary: Delete a tag
+      parameters:
+      - name: tag_id
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Result.
+  /tags/delete_tag_folder:
+    get:
+      operationId: deleteTagFolder
+      tags:
+      - Tags
+      summary: Delete a tag folder
+      parameters:
+      - name: folder_id
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Result.
+  /tags/assign:
+    get:
+      operationId: assignTag
+      tags:
+      - Tags
+      summary: Assign a tag to a person
+      parameters:
+      - name: person_id
+        in: query
+        schema:
+          type: string
+      - name: tag_id
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Result.
+  /tags/unassign:
+    get:
+      operationId: unassignTag
+      tags:
+      - Tags
+      summary: Unassign a tag from a person
+      parameters:
+      - name: person_id
+        in: query
+        schema:
+          type: string
+      - name: tag_id
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Result.
+components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid Api-Key header.
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Api-Key
+      description: Account API key sent in the Api-Key header. The Account Owner generates it under Manage Account > API Key in the Breeze web app.

@@ -1,0 +1,144 @@
+openapi: 3.0.3
+info:
+  title: Breeze ChMS Account Giving API
+  description: The Breeze ChMS API is a documented REST API for Breeze church management software. It is scoped to an individual church subdomain (https://{subdomain}.breezechms.com/api) and covers people, tags, events, check-in / attendance, giving (contributions), funds, pledge campaigns, custom forms, volunteers, and account administration. Every operation is an HTTP GET request whose inputs are supplied as query-string parameters; request bodies for create/update operations are passed as JSON-encoded strings in parameters such as fields_json and funds_json. Authentication is an account API key sent in the Api-Key HTTP header. The API is rate limited to roughly 20 requests per minute; wait about 3.5 seconds between calls. The API key is obtained by the Account Owner under Manage Account > API Key.
+  version: '1.0'
+  contact:
+    name: Breeze ChMS
+    url: https://www.breezechms.com
+servers:
+- url: https://{subdomain}.breezechms.com/api
+  description: Church-specific Breeze subdomain
+  variables:
+    subdomain:
+      default: yourchurch
+      description: Your church's Breeze subdomain.
+security:
+- apiKeyAuth: []
+tags:
+- name: Giving
+  description: Contributions (giving records).
+paths:
+  /giving/list:
+    get:
+      operationId: listContributions
+      tags:
+      - Giving
+      summary: List contributions
+      parameters:
+      - name: start
+        in: query
+        schema:
+          type: string
+      - name: end
+        in: query
+        schema:
+          type: string
+      - name: person_id
+        in: query
+        schema:
+          type: string
+      - name: fund_ids
+        in: query
+        schema:
+          type: string
+      - name: amount_min
+        in: query
+        schema:
+          type: string
+      - name: amount_max
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of contributions.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /giving/add:
+    get:
+      operationId: addContribution
+      tags:
+      - Giving
+      summary: Add a contribution
+      parameters:
+      - name: date
+        in: query
+        schema:
+          type: string
+      - name: name
+        in: query
+        schema:
+          type: string
+      - name: person_id
+        in: query
+        schema:
+          type: string
+      - name: amount
+        in: query
+        schema:
+          type: string
+      - name: method
+        in: query
+        schema:
+          type: string
+      - name: funds_json
+        in: query
+        schema:
+          type: string
+        description: JSON-encoded array splitting the gift across funds.
+      - name: payment_id
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The created contribution.
+  /giving/edit:
+    get:
+      operationId: editContribution
+      tags:
+      - Giving
+      summary: Edit a contribution
+      parameters:
+      - name: payment_id
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: amount
+        in: query
+        schema:
+          type: string
+      - name: funds_json
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The updated contribution.
+  /giving/delete:
+    get:
+      operationId: deleteContribution
+      tags:
+      - Giving
+      summary: Delete a contribution
+      parameters:
+      - name: payment_id
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Result.
+components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid Api-Key header.
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Api-Key
+      description: Account API key sent in the Api-Key header. The Account Owner generates it under Manage Account > API Key in the Breeze web app.
