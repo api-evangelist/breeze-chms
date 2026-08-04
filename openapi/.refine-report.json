@@ -1,0 +1,32 @@
+{
+  "provider": "breeze-chms",
+  "sources": [
+    "breeze-chms-account-api-openapi.yml",
+    "breeze-chms-attendance-api-openapi.yml",
+    "breeze-chms-events-api-openapi.yml",
+    "breeze-chms-forms-api-openapi.yml",
+    "breeze-chms-funds-api-openapi.yml",
+    "breeze-chms-giving-api-openapi.yml",
+    "breeze-chms-people-api-openapi.yml",
+    "breeze-chms-pledges-api-openapi.yml",
+    "breeze-chms-tags-api-openapi.yml",
+    "breeze-chms-volunteers-api-openapi.yml"
+  ],
+  "outputs": [
+    "breeze-chms-account-api-openapi.yml",
+    "breeze-chms-attendance-api-openapi.yml",
+    "breeze-chms-events-api-openapi.yml",
+    "breeze-chms-forms-api-openapi.yml",
+    "breeze-chms-funds-api-openapi.yml",
+    "breeze-chms-giving-api-openapi.yml",
+    "breeze-chms-people-api-openapi.yml",
+    "breeze-chms-pledges-api-openapi.yml",
+    "breeze-chms-tags-api-openapi.yml",
+    "breeze-chms-volunteers-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
