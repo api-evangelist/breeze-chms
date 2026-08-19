@@ -1,0 +1,226 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Breeze ChMS Account People API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Api-Key",
+      "value": "{{Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "People",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List people",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/people",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of people to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of people to skip for paging."
+              },
+              {
+                "name": "details",
+                "value": "",
+                "type": "query",
+                "description": "Set to 1 to include full profile field details."
+              },
+              {
+                "name": "filter_json",
+                "value": "",
+                "type": "query",
+                "description": "JSON-encoded filter of profile field criteria."
+              }
+            ]
+          },
+          "docs": "Retrieves a paged list of people (members and contacts)."
+        },
+        {
+          "info": {
+            "name": "Retrieve a person",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/people/:person_id",
+            "params": [
+              {
+                "name": "person_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "details",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a single person by ID."
+        },
+        {
+          "info": {
+            "name": "Add a person",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/people/add",
+            "params": [
+              {
+                "name": "first",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "last",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fields_json",
+                "value": "",
+                "type": "query",
+                "description": "JSON-encoded array of profile field values."
+              }
+            ]
+          },
+          "docs": "Add a person"
+        },
+        {
+          "info": {
+            "name": "Update a person",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/people/update",
+            "params": [
+              {
+                "name": "person_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fields_json",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Update a person"
+        },
+        {
+          "info": {
+            "name": "Delete a person",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/people/delete",
+            "params": [
+              {
+                "name": "person_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Delete a person"
+        },
+        {
+          "info": {
+            "name": "List profile fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/profile"
+          },
+          "docs": "Lists the profile fields (and sections) configured for the church."
+        },
+        {
+          "info": {
+            "name": "Create a family",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/families/create",
+            "params": [
+              {
+                "name": "people_ids_json",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Create a family"
+        },
+        {
+          "info": {
+            "name": "Add people to a family",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/families/add",
+            "params": [
+              {
+                "name": "people_ids_json",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "target_person_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Add people to a family"
+        },
+        {
+          "info": {
+            "name": "Remove people from a family",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/families/remove",
+            "params": [
+              {
+                "name": "people_ids_json",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Remove people from a family"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

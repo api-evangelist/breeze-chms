@@ -1,0 +1,279 @@
+{
+  "item": [
+    {
+      "id": "97f4a8f6-9288-4696-87c6-86bfbe823228",
+      "name": "Pledges",
+      "description": {
+        "content": "Pledge campaigns and pledges.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e019ddc8-d8e1-438d-a250-4ae06dee3c13",
+          "name": "List pledge campaigns",
+          "request": {
+            "name": "List pledge campaigns",
+            "description": {},
+            "url": {
+              "path": [
+                "pledges",
+                "list_campaigns"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your church's Breeze subdomain.",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d9715ce5-521f-488b-8243-96a634393b77",
+              "name": "A list of pledge campaigns.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pledges",
+                    "list_campaigns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your church's Breeze subdomain.",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "79216105-6814-4857-931d-adcd711fe58c",
+              "name": "Missing or invalid Api-Key header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pledges",
+                    "list_campaigns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your church's Breeze subdomain.",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff656818-6f88-4768-92a1-970db758688e",
+          "name": "List pledges in a campaign",
+          "request": {
+            "name": "List pledges in a campaign",
+            "description": {},
+            "url": {
+              "path": [
+                "pledges",
+                "list_pledges"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "campaign_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your church's Breeze subdomain.",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c02ed83d-ff26-4ab7-acde-db781d5d83bb",
+              "name": "A list of pledges.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pledges",
+                    "list_pledges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "campaign_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your church's Breeze subdomain.",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your church's Breeze subdomain.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "yourchurch",
+      "key": "subdomain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{subdomain}}.breezechms.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Api-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bbca4ac0-775b-49e5-8b5c-0c48abbd3ec3",
+    "name": "Breeze ChMS Account Pledges API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Breeze ChMS API is a documented REST API for Breeze church management software. It is scoped to an individual church subdomain (https://{subdomain}.breezechms.com/api) and covers people, tags, events, check-in / attendance, giving (contributions), funds, pledge campaigns, custom forms, volunteers, and account administration. Every operation is an HTTP GET request whose inputs are supplied as query-string parameters; request bodies for create/update operations are passed as JSON-encoded strings in parameters such as fields_json and funds_json. Authentication is an account API key sent in the Api-Key HTTP header. The API is rate limited to roughly 20 requests per minute; wait about 3.5 seconds between calls. The API key is obtained by the Account Owner under Manage Account > API Key.\n\nContact Support:\n Name: Breeze ChMS",
+      "type": "text/plain"
+    }
+  }
+}

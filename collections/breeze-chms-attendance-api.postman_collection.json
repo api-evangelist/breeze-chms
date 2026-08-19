@@ -1,0 +1,542 @@
+{
+  "item": [
+    {
+      "id": "228b196e-1e25-4124-b687-1a84f64a89e7",
+      "name": "Attendance",
+      "description": {
+        "content": "Check-in / check-out attendance and eligibility.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cfe5c34f-78eb-4496-a050-1b7134fc5fd0",
+          "name": "Add attendance (check in / out)",
+          "request": {
+            "name": "Add attendance (check in / out)",
+            "description": {},
+            "url": {
+              "path": [
+                "events",
+                "attendance",
+                "add"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "person_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "instance_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your church's Breeze subdomain.",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "577957ff-c701-4722-91f8-2ae8500b382d",
+              "name": "Result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "attendance",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "person_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instance_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your church's Breeze subdomain.",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b41cb7cf-021a-4f73-8bcc-0c38069ef8e9",
+              "name": "Missing or invalid Api-Key header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "attendance",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "person_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instance_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your church's Breeze subdomain.",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2aa7299d-c08c-4be0-9ca8-34755843d92d",
+          "name": "Delete attendance",
+          "request": {
+            "name": "Delete attendance",
+            "description": {},
+            "url": {
+              "path": [
+                "events",
+                "attendance",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "person_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "instance_id",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your church's Breeze subdomain.",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a98ac38b-7b5e-4d33-986e-1256d348b833",
+              "name": "Result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "attendance",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "person_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "instance_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your church's Breeze subdomain.",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "31de731a-b6cf-457f-8c9f-cae0cb07dc23",
+          "name": "List attendance for an event",
+          "request": {
+            "name": "List attendance for an event",
+            "description": {},
+            "url": {
+              "path": [
+                "events",
+                "attendance",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "instance_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "details",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your church's Breeze subdomain.",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b56ba8cb-2875-43cb-a3bf-7526e114a395",
+              "name": "A list of attendance records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "attendance",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instance_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "details",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your church's Breeze subdomain.",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fd2d1174-c555-442d-84bc-ebfa4f8de311",
+          "name": "List people eligible to check in",
+          "request": {
+            "name": "List people eligible to check in",
+            "description": {},
+            "url": {
+              "path": [
+                "events",
+                "attendance",
+                "eligible"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "instance_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your church's Breeze subdomain.",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fed93df3-62d9-4c42-9467-63488807b273",
+              "name": "A list of eligible people.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "attendance",
+                    "eligible"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "instance_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your church's Breeze subdomain.",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your church's Breeze subdomain.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "yourchurch",
+      "key": "subdomain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{subdomain}}.breezechms.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Api-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f2bea844-e1c2-4901-8ddd-36ab69ef973b",
+    "name": "Breeze ChMS Account Attendance API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Breeze ChMS API is a documented REST API for Breeze church management software. It is scoped to an individual church subdomain (https://{subdomain}.breezechms.com/api) and covers people, tags, events, check-in / attendance, giving (contributions), funds, pledge campaigns, custom forms, volunteers, and account administration. Every operation is an HTTP GET request whose inputs are supplied as query-string parameters; request bodies for create/update operations are passed as JSON-encoded strings in parameters such as fields_json and funds_json. Authentication is an account API key sent in the Api-Key HTTP header. The API is rate limited to roughly 20 requests per minute; wait about 3.5 seconds between calls. The API key is obtained by the Account Owner under Manage Account > API Key.\n\nContact Support:\n Name: Breeze ChMS",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,202 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Breeze ChMS Account Events API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Api-Key",
+      "value": "{{Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/events",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Start date (YYYY-MM-DD)."
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "End date (YYYY-MM-DD)."
+              },
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "eligible",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "details",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List events"
+        },
+        {
+          "info": {
+            "name": "Retrieve an event instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/events/list_event",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "schedule",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "schedule_direction",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "schedule_limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "eligible",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "details",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve an event instance"
+        },
+        {
+          "info": {
+            "name": "List calendars",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/events/calendars/list"
+          },
+          "docs": "List calendars"
+        },
+        {
+          "info": {
+            "name": "List event locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/events/locations"
+          },
+          "docs": "List event locations"
+        },
+        {
+          "info": {
+            "name": "Add an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/events/add",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "starts_on",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ends_on",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "all_day",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "event_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Add an event"
+        },
+        {
+          "info": {
+            "name": "Delete an event instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/events/delete",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Delete an event instance"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

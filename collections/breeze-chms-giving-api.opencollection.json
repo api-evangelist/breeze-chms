@@ -1,0 +1,164 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Breeze ChMS Account Giving API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Api-Key",
+      "value": "{{Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Giving",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List contributions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/giving/list",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "person_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fund_ids",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "amount_min",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "amount_max",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List contributions"
+        },
+        {
+          "info": {
+            "name": "Add a contribution",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/giving/add",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "person_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "method",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "funds_json",
+                "value": "",
+                "type": "query",
+                "description": "JSON-encoded array splitting the gift across funds."
+              },
+              {
+                "name": "payment_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Add a contribution"
+        },
+        {
+          "info": {
+            "name": "Edit a contribution",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/giving/edit",
+            "params": [
+              {
+                "name": "payment_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "funds_json",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Edit a contribution"
+        },
+        {
+          "info": {
+            "name": "Delete a contribution",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/giving/delete",
+            "params": [
+              {
+                "name": "payment_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Delete a contribution"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

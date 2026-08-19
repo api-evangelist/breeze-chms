@@ -1,0 +1,618 @@
+{
+  "item": [
+    {
+      "id": "ef0b9dae-b14a-4864-b87d-288eb19ce8d5",
+      "name": "Giving",
+      "description": {
+        "content": "Contributions (giving records).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "da97a4b2-32f9-4504-8e6c-f568fc17a0ca",
+          "name": "List contributions",
+          "request": {
+            "name": "List contributions",
+            "description": {},
+            "url": {
+              "path": [
+                "giving",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "person_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "fund_ids",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "amount_min",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "amount_max",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your church's Breeze subdomain.",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "85edd59e-bf60-4a66-a8ba-a26653fe5f44",
+              "name": "A list of contributions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "giving",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "person_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fund_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount_min",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount_max",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your church's Breeze subdomain.",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "29132342-ac42-4790-9c92-9a2911751870",
+              "name": "Missing or invalid Api-Key header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "giving",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "person_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fund_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount_min",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount_max",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your church's Breeze subdomain.",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd8994b0-366b-4824-8110-ad3d2bdd96a8",
+          "name": "Add a contribution",
+          "request": {
+            "name": "Add a contribution",
+            "description": {},
+            "url": {
+              "path": [
+                "giving",
+                "add"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "person_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "method",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "funds_json",
+                  "value": "<string>",
+                  "description": "JSON-encoded array splitting the gift across funds."
+                },
+                {
+                  "disabled": false,
+                  "key": "payment_id",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your church's Breeze subdomain.",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e1d51517-9b7a-4419-8c0d-45629123b231",
+              "name": "The created contribution.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "giving",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "person_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "funds_json",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "payment_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your church's Breeze subdomain.",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3bc341d8-383b-4388-8de0-71ef30abd52d",
+          "name": "Edit a contribution",
+          "request": {
+            "name": "Edit a contribution",
+            "description": {},
+            "url": {
+              "path": [
+                "giving",
+                "edit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "payment_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "funds_json",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your church's Breeze subdomain.",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "032b128c-3055-4b9f-bcee-e36392972061",
+              "name": "The updated contribution.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "giving",
+                    "edit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "payment_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "funds_json",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your church's Breeze subdomain.",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8806daa3-d733-4ac6-b200-06f47192f0f3",
+          "name": "Delete a contribution",
+          "request": {
+            "name": "Delete a contribution",
+            "description": {},
+            "url": {
+              "path": [
+                "giving",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "payment_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your church's Breeze subdomain.",
+                  "type": "any",
+                  "value": "{{subdomain}}",
+                  "key": "subdomain"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "590164f3-6c5a-4469-af22-f3f8bbe698dc",
+              "name": "Result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "giving",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "payment_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your church's Breeze subdomain.",
+                      "type": "any",
+                      "value": "{{subdomain}}",
+                      "key": "subdomain"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your church's Breeze subdomain.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "yourchurch",
+      "key": "subdomain"
+    },
+    {
+      "type": "string",
+      "value": "https://{{subdomain}}.breezechms.com/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Api-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f5f318a7-f994-49bc-899b-04ad62c19683",
+    "name": "Breeze ChMS Account Giving API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Breeze ChMS API is a documented REST API for Breeze church management software. It is scoped to an individual church subdomain (https://{subdomain}.breezechms.com/api) and covers people, tags, events, check-in / attendance, giving (contributions), funds, pledge campaigns, custom forms, volunteers, and account administration. Every operation is an HTTP GET request whose inputs are supplied as query-string parameters; request bodies for create/update operations are passed as JSON-encoded strings in parameters such as fields_json and funds_json. Authentication is an account API key sent in the Api-Key HTTP header. The API is rate limited to roughly 20 requests per minute; wait about 3.5 seconds between calls. The API key is obtained by the Account Owner under Manage Account > API Key.\n\nContact Support:\n Name: Breeze ChMS",
+      "type": "text/plain"
+    }
+  }
+}

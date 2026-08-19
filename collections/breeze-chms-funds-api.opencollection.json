@@ -1,0 +1,44 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Breeze ChMS Account Funds API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Api-Key",
+      "value": "{{Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Funds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List funds",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/funds/list",
+            "params": [
+              {
+                "name": "include_totals",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List funds"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

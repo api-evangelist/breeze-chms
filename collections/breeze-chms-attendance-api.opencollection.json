@@ -1,0 +1,123 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Breeze ChMS Account Attendance API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Api-Key",
+      "value": "{{Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Attendance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add attendance (check in / out)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/events/attendance/add",
+            "params": [
+              {
+                "name": "person_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Add attendance (check in / out)"
+        },
+        {
+          "info": {
+            "name": "Delete attendance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/events/attendance/delete",
+            "params": [
+              {
+                "name": "person_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Delete attendance"
+        },
+        {
+          "info": {
+            "name": "List attendance for an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/events/attendance/list",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "details",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List attendance for an event"
+        },
+        {
+          "info": {
+            "name": "List people eligible to check in",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/events/attendance/eligible",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List people eligible to check in"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

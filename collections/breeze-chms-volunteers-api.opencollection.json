@@ -1,0 +1,192 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Breeze ChMS Account Volunteers API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Api-Key",
+      "value": "{{Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Volunteers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List volunteers for an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/volunteers/list",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List volunteers for an event"
+        },
+        {
+          "info": {
+            "name": "Add a volunteer to an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/volunteers/add",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "person_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Add a volunteer to an event"
+        },
+        {
+          "info": {
+            "name": "Remove a volunteer from an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/volunteers/remove",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "person_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Remove a volunteer from an event"
+        },
+        {
+          "info": {
+            "name": "Update a volunteer's roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/volunteers/update",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "person_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "role_ids_json",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Update a volunteer's roles"
+        },
+        {
+          "info": {
+            "name": "List volunteer roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/volunteers/list_roles",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "show_quantity",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List volunteer roles"
+        },
+        {
+          "info": {
+            "name": "Add a volunteer role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/volunteers/add_role",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "quantity",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Add a volunteer role"
+        },
+        {
+          "info": {
+            "name": "Remove a volunteer role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/volunteers/remove_role",
+            "params": [
+              {
+                "name": "instance_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "role_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Remove a volunteer role"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

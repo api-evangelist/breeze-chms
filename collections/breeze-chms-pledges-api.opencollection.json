@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Breeze ChMS Account Pledges API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Api-Key",
+      "value": "{{Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pledges",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List pledge campaigns",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/pledges/list_campaigns"
+          },
+          "docs": "List pledge campaigns"
+        },
+        {
+          "info": {
+            "name": "List pledges in a campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/pledges/list_pledges",
+            "params": [
+              {
+                "name": "campaign_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List pledges in a campaign"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

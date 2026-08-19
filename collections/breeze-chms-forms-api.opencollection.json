@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Breeze ChMS Account Forms API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Api-Key",
+      "value": "{{Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Forms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List forms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/forms/list_forms",
+            "params": [
+              {
+                "name": "is_archived",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List forms"
+        },
+        {
+          "info": {
+            "name": "List a form's fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/forms/list_form_fields",
+            "params": [
+              {
+                "name": "form_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List a form's fields"
+        },
+        {
+          "info": {
+            "name": "List form entries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/forms/list_form_entries",
+            "params": [
+              {
+                "name": "form_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "details",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List form entries"
+        },
+        {
+          "info": {
+            "name": "Remove a form entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{subdomain}.breezechms.com/api/forms/remove_form_entry",
+            "params": [
+              {
+                "name": "entry_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Remove a form entry"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
