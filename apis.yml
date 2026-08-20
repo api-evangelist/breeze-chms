@@ -27,6 +27,14 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/breeze-chm
 tags:
 - Church Management
 - ChMS
+- Non-Profit
+- Giving
+- Membership
+- Event
+- Faith
+tags_raw:
+- Church Management
+- ChMS
 - Nonprofit
 - Giving
 - Membership
@@ -116,6 +124,8 @@ apis:
   humanURL: https://app.breezechms.com/api#people
   baseURL: https://{subdomain}.breezechms.com/api
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
