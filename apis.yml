@@ -10,6 +10,18 @@ description: Breeze ChMS is church management software (breezechms.com) for smal
   an account API key sent in the Api-Key HTTP header. All API operations are HTTP GET
   requests with query-string parameters, and the API is rate limited to roughly 20
   requests per minute.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: open
