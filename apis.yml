@@ -212,6 +212,8 @@ apis:
   humanURL: https://app.breezechms.com/api#people
   baseURL: https://{subdomain}.breezechms.com/api
   tags:
+  - Fund
+  tags_raw:
   - Funds
   properties:
   - type: OpenAPI
