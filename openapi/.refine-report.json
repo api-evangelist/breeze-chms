@@ -1,16 +1,7 @@
 {
   "provider": "breeze-chms",
   "sources": [
-    "breeze-chms-account-api-openapi.yml",
-    "breeze-chms-attendance-api-openapi.yml",
-    "breeze-chms-events-api-openapi.yml",
-    "breeze-chms-forms-api-openapi.yml",
-    "breeze-chms-funds-api-openapi.yml",
-    "breeze-chms-giving-api-openapi.yml",
-    "breeze-chms-people-api-openapi.yml",
-    "breeze-chms-pledges-api-openapi.yml",
-    "breeze-chms-tags-api-openapi.yml",
-    "breeze-chms-volunteers-api-openapi.yml"
+    "_original/breeze-chms-openapi.yml"
   ],
   "outputs": [
     "breeze-chms-account-api-openapi.yml",
@@ -27,6 +18,21 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "breeze-chms-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "breeze-chms-account-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "breeze-chms-attendance-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "breeze-chms-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "breeze-chms-forms-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "breeze-chms-funds-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "breeze-chms-giving-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "breeze-chms-people-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "breeze-chms-pledges-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "breeze-chms-tags-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "breeze-chms-volunteers-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
