@@ -112,3 +112,32 @@ plans:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - hybrid
+  - subscription
+  units:
+  - message
+  - period
+  - transaction
+  plans:
+  - name: Free Trial
+    access: trial
+    model: subscription
+    model_how: derived
+    units:
+    - period
+    periods:
+    - month
+  - name: Breeze Subscription (Flat Rate)
+    access: paid
+    model: hybrid
+    model_how: derived
+    units:
+    - message
+    - period
+    - transaction
+    periods:
+    - month
